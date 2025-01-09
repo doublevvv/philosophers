@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:35:32 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/09 07:46:44 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/09 12:39:34 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	*ft_memset(void *s, int c, size_t n)
 	}
 	return (s);
 }
-void	init_data(t_main *table, t_characters **philo)
+void	init_data(t_main *table)
 {
 	ft_memset(table, 0, sizeof(t_main));
-	ft_memset(philo, 0, sizeof(t_characters));
+
 }

@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 09:19:51 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/09 07:51:26 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:16:18 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_characters
     pthread_mutex_t *r_fork;
     pthread_mutex_t *l_fork;
     pthread_t   thread_id;
-
+	struct s_main	*table;
 }   t_characters;
 
 typedef struct s_main
@@ -40,7 +40,7 @@ typedef struct s_main
     size_t  time_sleep;
     size_t  time_die;
     // pthread_t   mutex;
-    pthread_mutex_t   mutex;
+    pthread_mutex_t   mutex; // variable only for the purpose of mutex's comprehension 
     t_characters    *philo;
 
 }   t_main; 
@@ -48,10 +48,11 @@ typedef struct s_main
 
 long	ft_atol(char **argv, char *str);
 void	ft_free_double_array(char **array);
-int     is_args_correct(char **arg, t_main *table, t_characters **philo);
+int     is_args_correct(char **arg, t_main *table);
 int     ft_is_numeric(char *str);
 void	thread_creation(t_main *table, t_characters *philo);
-void	init_data(t_main *table, t_characters **philo);
+void	init_data(t_main *table);
 void    *routine_table(void *data);
+void    index_creation(t_main *table, t_characters *philo, int i);
 
 # endif
