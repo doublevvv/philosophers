@@ -6,13 +6,13 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:25:57 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/08 16:47:19 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/09 09:06:42 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void fill_struct(char **arg, t_main *table, t_characters *philoo)
+void fill_struct(char **arg, t_main *table, t_characters *philoo) //retirer philoo
 {
 	(void)philoo;
     
@@ -27,7 +27,7 @@ void fill_struct(char **arg, t_main *table, t_characters *philoo)
     // printf("id = %d\nnbrmeals = %d\nlastmeal = %d\n", philoo->id_philo, philoo->nbr_meals, philoo->last_meal);
 }
 
-int is_args_correct(char **arg, t_main *table, t_characters *philo)
+int is_args_correct(char **arg, t_main *table, t_characters **philo)
 {
     int i;
     long n;
@@ -47,7 +47,8 @@ int is_args_correct(char **arg, t_main *table, t_characters *philo)
         }
         i++;
     }
-    *philo = malloc(sizeof(t_characters) * (table->mutex));
-    fill_struct(arg, table, philo);
+    fill_struct(arg, table, *philo);
+    *philo = malloc(sizeof(t_characters) * (table->nbr_philo));
+    thread_creation(table, *philo);
     return (0);
 }

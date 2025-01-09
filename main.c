@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:41:43 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/08 16:46:06 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/09 07:56:25 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ int main(int ac, char **av)
     init_data(&table, &philo);
     if(is_args_correct(av, &table, &philo) != 0)
         return (1);
-    thread_creation(&table, &philo);
+    //thread_creation(&table, &philo);
     return (0);
 }
