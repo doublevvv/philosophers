@@ -6,50 +6,104 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:29:05 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/09 14:44:42 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:09:23 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 /*
-creer threads et join them : a faire dans une boucle car nb de thread = nb de philo
+    creer threads et join them : a faire dans une boucle car nb de thread = nb de philo
 	donc tant x < nb philo; x++;
+
+    -EAT
+    -SLEEP
+    -THINK
+    
+    ❗must use mutex for printf
 */
+
+void    give_fork(t_main *table)
+{
+    int i;
+
+    i = 0;
+    while (i < table->nbr_philo)
+    {
+        if (i == table->nbr_philo - 1)
+           table->philo[i].l_fork = &table->philo[0].r_fork;
+        else
+            table->philo[i].l_fork = &table->philo[i + 1].r_fork;
+    }
+}
+
+void    print_action(char *c, t_characters *philo)
+{
+    //print temps aavec get time 
+    pthread_mutex_lock(&philo->table->mutex);
+    printf("%d", philo->id_philo);
+    pthread_mutex_unlock(&philo->table->mutex);
+}
+void    lock_fork(t_characters *philo)
+{
+    if (philo->id_philo % 2 ==  0) //donc pair
+        pthread_mutex_lock(philo->r_fork);
+    else
+        pthread_mutex_lock(philo->l_fork);
+    if (philo->id_philo % 2 ==  0)
+        pthread_mutex_lock(philo->l_fork);
+    else
+        pthread_mutex_lock(philo->r_fork);
+}
+
+void    philo_sleeping(t_characters *philo)
+{
+    //must use uspleep function (with get_current_time(?))
+    print_action("is sleeping", philo);
+    usleep(philo->table->time_sleep * 1000);
+}
+
+void    philo_thinking(t_characters *philo)
+{
+    print_action("is thinking", philo);
+}
+
+void    philo_eating(t_characters *philo)
+{
+    lock_fork(philo);
+    print_action("is eating\n", philo);
+    usleep(philo->table->time_meal * 1000);
+    pthread_mutex_unlock(philo->r_fork);
+    pthread_mutex_unlock(philo->l_fork);
+}
 
 void    *routine_table(void *data)
 {
     //loop that runs until any of your philosophers die
+
+    /*
+        when they think, printf "philo[i] is thinking"
+    */
     
     t_characters *philo;
 
     philo = (t_characters *)data;
-    pthread_mutex_lock(&philo->table->mutex);
-    printf("HELLO\n");
-    pthread_mutex_unlock(&philo->table->mutex);
+
+    while (philo->dead != 0)
+    {
+        philo_eating;
+        philo_sleeping;
+        philo_thinking;
+    }
     return (NULL);
 }
 
-// void    index_creation(t_main *table, t_characters *philo, int i)
-// {
-//     int index;
-
-//     index = 1;
-//     while (index < table->nbr_philo)
-//     {
-//         philo[i].thread_id = index;
-//         printf("INDEX : %lu\n", philo[i].thread_id);
-//         index++;
-//         i++;
-//     }
-// }
 
 void	thread_creation(t_main *table, t_characters *philo)
 {
     int i;
 
     i = 0;
-	// philo[i].thread_id = pthread_self(); //❗FUNCTION UNAUTHORIZED; id must be a index starting from 1
     while (i < table->nbr_philo) 
     {
         pthread_create(&philo[i].thread_id, NULL, &routine_table, (void *)&philo[i]);

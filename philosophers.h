@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 09:19:51 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/09 13:16:18 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:08:05 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_characters
     int id_philo;
     int nbr_meals;
     int last_meal;
-    bool    dead;
+    int    dead;
     pthread_mutex_t *r_fork;
     pthread_mutex_t *l_fork;
     pthread_t   thread_id;
@@ -36,11 +36,11 @@ typedef struct s_characters
 typedef struct s_main
 {
     int nbr_philo;
+    int max_nbr_meals;
     size_t  time_meal;
     size_t  time_sleep;
     size_t  time_die;
-    // pthread_t   mutex;
-    pthread_mutex_t   mutex; // variable only for the purpose of mutex's comprehension 
+    pthread_mutex_t   mutex;
     t_characters    *philo;
 
 }   t_main; 

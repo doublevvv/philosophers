@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:25:57 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/09 14:48:49 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/10 15:08:36 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void fill_struct(char **arg, t_main *table) //retirer philoo
     table->time_die = ft_atol(arg, arg[2]);
     table->time_meal = ft_atol(arg, arg[3]);
     table->time_sleep = ft_atol(arg, arg[4]);
+    table->max_nbr_meals = ft_atol(arg, arg[5]);
     // printf("NB = %d\n", table->nbr_philo);
     // printf("die = %zu\n", table->time_die);
     // printf("eat = %zu\n", table->time_meal);
@@ -48,12 +49,15 @@ int is_args_correct(char **arg, t_main *table)
     }
     fill_struct(arg, table);
     table->philo = malloc(sizeof(t_characters) * (table->nbr_philo));
-    pthread_mutex_init(&table->mutex, NULL);
+    if (pthread_mutex_init(&table->mutex, NULL))
+        return (0);
     i = 0;
     while (i < table->nbr_philo)
     {   
         table->philo[i].id_philo = i + 1;
 		table->philo[i].table = table;
+        if (pthread_mutex_init(table->philo[i].r_fork, NULL) != 0)
+            return (0);
         i++;
     }
     thread_creation(table, table->philo);
