@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 10:29:05 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/10 15:09:23 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/12 13:48:24 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@
     
     ❗must use mutex for printf
 */
+
+void    get_time()
+{
+    struct timeval start;
+    struct timeval end;
+    unsigned long e_usec;
+
+    gettimeofday(&start, 0);
+    gettimeofday(&end, 0);
+
+    e_usec = ((end.tv_sec * 1000000) + end.tv_usec) - ((start.tv_sec * 1000000) + start.tv_usec);
+    //printf("elapsed time: %lu microseconds\n", e_usec);
+    
+}
 
 void    give_fork(t_main *table)
 {
@@ -39,9 +53,9 @@ void    give_fork(t_main *table)
 
 void    print_action(char *c, t_characters *philo)
 {
-    //print temps aavec get time 
+    //print temps avec get time 
     pthread_mutex_lock(&philo->table->mutex);
-    printf("%d", philo->id_philo);
+    printf("[%lu] %d", get_time, philo->id_philo); //initialize time
     pthread_mutex_unlock(&philo->table->mutex);
 }
 void    lock_fork(t_characters *philo)
