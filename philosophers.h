@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 09:19:51 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/13 17:19:18 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:53:22 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,17 @@ void	thread_creation(t_main *table, t_characters *philo);
 void	init_data(t_main *table);
 void    *routine_table(void *data);
 void    index_creation(t_main *table, t_characters *philo);
-long    get_time(t_characters *philo);
+size_t    get_time(t_characters *philo);
 int    give_fork(t_main *table);
+int    check_death(t_characters *philo);
+int    is_death_true(t_characters *philo);
+void    monitoring(t_main *table);
+void    unlock_fork(t_characters *philo);
+void    lock_fork(t_characters *philo);
+void    print_action(char *c, t_characters *philo);
+int    philo_sleeping(t_characters *philo);
+int    philo_thinking(t_characters *philo);
+int   philo_eating(t_characters *philo);
+
 
 # endif

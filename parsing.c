@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:25:57 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/13 17:13:53 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:44:23 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int    give_fork(t_main *table) //utiliser avant la routine
     i = 0;
     while (i < table->nbr_philo)
     {
-        table->philo[i].r_fork = malloc(sizeof(pthread_mutex_t ));
+        table->philo[i].r_fork = malloc(sizeof(pthread_mutex_t));
+            //❗ protger malloc
         pthread_mutex_init(table->philo[i].r_fork, NULL);
         i++;
     }
@@ -60,6 +61,7 @@ int is_args_correct(char **arg, t_main *table)
     i = 1;
     while (arg[i])
     {
+        // ❗verifier arg philo pas egal a 0
         if (ft_is_numeric(arg[i]) != 1){
             printf("FALSE\n");
            return (1);
@@ -74,8 +76,9 @@ int is_args_correct(char **arg, t_main *table)
     }
     fill_struct(arg, table);
     table->philo = malloc(sizeof(t_characters) * (table->nbr_philo));
+        // ❗ proteger malloc
     give_fork(table);
-    if (pthread_mutex_init(&table->mutex, NULL))
+    if (pthread_mutex_init(&table->mutex, NULL) != 0)
         return (0);
     i = 0;
     while (i < table->nbr_philo)

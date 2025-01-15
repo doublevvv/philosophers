@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:41:43 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/13 17:59:54 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:35:50 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
     - [optionnal] nbr of meals
 */
 
-
 int main(int ac, char **av)
 {
     t_main  table;
@@ -30,8 +29,11 @@ int main(int ac, char **av)
         return (0);
     init_data(&table);
     gettimeofday(&table.start, NULL);
-    if(is_args_correct(av, &table) != 0)
-        return (1);
+    is_args_correct(av, &table);
+    monitoring(&table);
     free(table.philo);
+     // while (i < table->nbr_philo)
+    //     pthread_join(philo[i++].thread_id, NULL);
+    // pthread_mutex_destroy(&table->mutex);
     return (0);
 }
