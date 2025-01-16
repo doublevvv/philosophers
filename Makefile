@@ -6,7 +6,7 @@
 #    By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 08:40:56 by vlaggoun          #+#    #+#              #
-#    Updated: 2025/01/15 09:52:48 by vlaggoun         ###   ########.fr        #
+#    Updated: 2025/01/16 16:18:08 by vlaggoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread #-g3 -fsanitize=thread
 #CFLAGS = -g3
 
 RM = rm -rf

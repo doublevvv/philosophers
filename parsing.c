@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:25:57 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/14 15:44:23 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/16 15:52:35 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 void fill_struct(char **arg, t_main *table) //retirer philoo
 {
-    table->max_nbr_meals = -1;
+    // table->max_nbr_meals = -1;
+    table->loop_eat = false;
+    table->finished = false;
     table->nbr_philo = ft_atol(arg, arg[1]);
     table->time_die = ft_atol(arg, arg[2]);
     table->time_meal = ft_atol(arg, arg[3]);
     table->time_sleep = ft_atol(arg, arg[4]);
     if(arg[5])
+    {
+        table->loop_eat = true;
         table->max_nbr_meals = ft_atol(arg, arg[5]);
+    }
     printf("%d nb_loop\n", table->max_nbr_meals);
     // printf("NB = %d\n", table->nbr_philo);
     // printf("die = %zu\n", table->time_die);
@@ -86,6 +91,7 @@ int is_args_correct(char **arg, t_main *table)
         table->philo[i].id_philo = i + 1;
 		table->philo[i].table = table;
         table->philo[i].dead = 0;
+        table->philo[i].last_meal = 0;
         i++;
     }
     thread_creation(table, table->philo);
