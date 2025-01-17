@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 09:19:51 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/17 16:13:54 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:05:04 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	check_death(t_characters *philo);
 int	is_death_true(t_characters *philo);
 void	monitoring(t_main *table);
 void	unlock_fork(t_characters *philo);
-void	lock_fork(t_characters *philo);
+int	lock_fork(t_characters *philo);
 int	print_action(char *c, t_characters *philo);
 int	philo_sleeping(t_characters *philo);
 int	philo_thinking(t_characters *philo);

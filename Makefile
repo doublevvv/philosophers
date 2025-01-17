@@ -6,7 +6,7 @@
 #    By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/06 08:40:56 by vlaggoun          #+#    #+#              #
-#    Updated: 2025/01/17 07:18:02 by vlaggoun         ###   ########.fr        #
+#    Updated: 2025/01/17 17:05:58 by vlaggoun         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 HEADER = philosophers.h
 
-SOURCES = main.c parsing.c utils.c free.c init.c threads.c monitor.c
+SOURCES = main.c parsing.c utils.c init.c threads.c monitor.c
 
 SRCS = $(addprefix $(OBJ_DIR)/, $(SOURCES))
 
