@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 09:31:03 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/07 12:48:40 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/17 15:31:16 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,19 @@ int	ft_is_numeric(char *str)
 			return (1);
 		i++;
 	}
+	return (0);
+}
+
+int	free_simulation(t_main *table)
+{
+	int i;
+
+	i = 0;
+	while (i < table->nbr_philo)
+    {
+		free(table->philo[i].r_fork);
+        i++;
+    }
+	free(table->philo);
 	return (0);
 }
