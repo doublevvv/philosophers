@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 09:51:47 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/17 15:45:11 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/20 16:24:53 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,26 @@ int	is_death_true(t_characters *philo)
 {
 	size_t	time;
 	size_t	l_meal;
+	int		i;
 
-	pthread_mutex_lock(&philo->table->mutex);
-	l_meal = philo->last_meal;
-	pthread_mutex_unlock(&philo->table->mutex);
-	time = get_time(philo) - l_meal;
-	pthread_mutex_lock(&philo->table->mutex);
-	if (time >= philo->table->time_die)
+	i = 0;
+	while (i < philo->table->nbr_philo)
 	{
-		philo->dead = 1;
-		philo->table->finished = true;
+		pthread_mutex_lock(&philo->table->mutex);
+		l_meal = philo[i].last_meal;
 		pthread_mutex_unlock(&philo->table->mutex);
-		return (1);
+		time = get_time(philo) - l_meal;
+		pthread_mutex_lock(&philo->table->mutex);
+		if (time >= philo->table->time_die)
+		{
+			philo[i].dead = 1;
+			philo[i].table->finished = true;
+			pthread_mutex_unlock(&philo->table->mutex);
+			return (1);
+		}
+		i++;
+		pthread_mutex_unlock(&philo->table->mutex);
 	}
-	pthread_mutex_unlock(&philo->table->mutex);
 	return (0);
 }
 
@@ -49,8 +55,6 @@ void	monitoring(t_main *table)
 {
 	while (1)
 	{
-		pthread_mutex_lock(&table->mutex);
-		pthread_mutex_unlock(&table->mutex);
 		if (is_death_true(table->philo) == 1)
 		{
 			print_action("died", table->philo);

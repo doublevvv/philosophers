@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 09:31:03 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/17 15:31:16 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:38:49 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,30 @@ long	ft_atol(char **argv, char *str)
 int	ft_is_numeric(char *str)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (str[i])
 	{
 		if (str[i] >= '0' && str[i] <= '9')
+			i++;
+		else
 			return (1);
-		i++;
 	}
 	return (0);
 }
 
 int	free_simulation(t_main *table)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < table->nbr_philo)
-    {
+	{
 		free(table->philo[i].r_fork);
-        i++;
-    }
+		i++;
+	}
 	free(table->philo);
 	return (0);
 }

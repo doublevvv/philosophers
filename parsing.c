@@ -6,7 +6,7 @@
 /*   By: vlaggoun <vlaggoun@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:25:57 by vlaggoun          #+#    #+#             */
-/*   Updated: 2025/01/17 17:05:32 by vlaggoun         ###   ########.fr       */
+/*   Updated: 2025/01/20 12:37:55 by vlaggoun         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	is_args_correct(char **arg, t_main *table)
 	{
 		if (arg[1] == 0)
 			return (1);
-		if (ft_is_numeric(arg[i]) != 1)
+		if (ft_is_numeric(arg[i]) == 1)
 			return (1);
 		n = ft_atol(arg, arg[i]);
 		if (n < -2147483648 || n > 2147483647 || n < 1)
